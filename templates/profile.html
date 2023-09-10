@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+{% block title %}My Profile{% endblock title %} 
+{% block content %}
+<h1>My Profile</h1>
+{% endblock content %} 
+{% block body %}
+
+<section id="pofile" class="profile">
+  <div class="container">
+    <h1 class="subheadtxt">My Profile</h1>
+
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">products</th>
+          <th scope="col">Amount Paid</th>
+          <th scope="col">Payment Status</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Delivery Status</th>
+          <th scope="col">Delivered</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        {% for item in items %}
+        <tr>
+          <td scope="row">{{ item.oid }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.items_json }}</td>
+          <td>{{ item.amount }}</td>
+          <td>{{ item.paymentstatus }}</td>
+          <td>{{ item.address1 }}</td>
+          <td>{{ item.phone }}</td>
+          {% if item.status_info %} {% for status in item.status_info %}
+          <td scope="row">{{ status.update_desc }}</td>
+          {% if status.delivered %}
+          <td>
+            <i class="fa-solid fa-circle-check" style="color: #d94ae3"
+              ></i
+            >Delivered
+          </td>
+          {% else %}
+          <td>
+            <i class="fa-solid fa-truck-arrow-right" style="color: #9258da"
+              ></i
+            >Not Delivered
+          </td>
+          {% endif %}
+          <td>{{ status.timestamp }}</td>
+          {% endfor %} 
+          {% else %}
+          <td>No status information available</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock body %}

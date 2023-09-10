@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock title %}
+{% block content %}
+<h1 class="mb-4 pb-4 textbold">We Are here to help You Out!!!</h1>
+<a href="#contact" class="btn-get-started scrollto">Contact Us</a>
+{% endblock content %} 
+{% block body %}
+<h2 class="text-center subheadtxt mt-3">Hello. What can we help you with?</h2>
+<div id="contact" class="container-fluid mt-4 mb-4 row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 text-center">
+    <div class="card bg-light p-5">
+      {% for message in messages %}
+
+      <div
+        class="alert alert-{{message.tags}} alert-dismissible fade show"
+        role="alert"
+      >
+        <strong></strong>{{ message }}
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="alert"
+          aria-bs-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      <form class="text-dark py-2 px-2" action="/contact" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="form-control mb-2 frinput"
+            id="name"
+            name="name"
+            aria-describedby="Full Name"
+            required
+          />
+        </div>
+
+        <label for="exampleInputEmail1">Email address</label>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control mb-2 frinput"
+            id="email"
+            name="email"
+            value="{{user.email}}"
+            aria-describedby="emailHelp"
+            required
+          />
+        </div>
+
+        <label for="pnumber">Phone No.</label>
+        <div class="form-group">
+          <input
+           type="number"
+            name="pnumber"
+            id="pnumber"
+            class="form-control mb-2 frinput"
+            cols="30"
+            rows="3"
+            />
+        </div>
+
+        <label for="desc">How can we Help you?</label>
+        <div class="form-group">
+          <textarea
+            name="desc"
+            id="desc"
+            class="form-control mb-2 frinput"
+            cols="30"
+            rows="3"
+          >
+          </textarea>
+        </div>
+        
+        <br />
+        <button type="submit" class="btn-get-started2">Submit Response</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+{% endblock body %}

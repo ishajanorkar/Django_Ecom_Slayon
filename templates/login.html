@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card bg-light p-5">
+ {% for message in messages %}
+
+  <div
+    class="alert alert-{{message.tags}} alert-dismissible fade show"
+    role="alert"
+  >
+    <strong></strong>{{ message }}
+    <button type="button" class="close" data-bs-dismiss="alert" aria-bs-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
+  {% endfor %}
+  <form class="text-dark py-2 px-2" action="/auth/login/" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input
+        type="email"
+        class="form-control mb-2 frinput"
+        id="email"
+        name="email"
+        aria-describedby="emailHelp"
+        required
+      />
+      <small id="emailHelp" class="form-text text-muted text-white"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input
+        type="password"
+        class="form-control mb-2"
+        name="pass1"
+        id="exampleInputPassword1"
+        required
+      />
+    </div>
+   
+    <br />
+    <button type="submit" class=" btn-get-started">Log In</button>
+    <p class="mt-2 mb-2 pb-0">New customer?</p>
+
+    <a href="/auth/signup/" class="about-btn scrollto">Sign Up</a>
+  </form>
+</div>
+
+{% endblock content %}
+
